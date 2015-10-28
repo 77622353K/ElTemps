@@ -55,6 +55,10 @@ public class WeatherFragment extends Fragment {
                 items
         );
 
+        OwmApiClient apiClient = new OwmApiClient();
+        apiClient.updateForecasts(adapter, getContext());
+
+
         ListView lvForecast = (ListView) rootView.findViewById(R.id.lvForecasts);
         lvForecast.setAdapter(adapter);
 
@@ -81,10 +85,15 @@ public class WeatherFragment extends Fragment {
         }
 
         if (id == R.id.action_refresh) {
+            refresh();
             return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
 
+    private void refresh() {
+        OwmApiClient apiClient = new OwmApiClient();
+        apiClient.updateForecasts(adapter, getContext());
+    }
 }
